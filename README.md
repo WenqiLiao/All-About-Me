@@ -86,7 +86,6 @@ An Example Comment:
 * (5 points) Integrate user authentication
     * The integrated authentication checks whether there is an authenticated user. If not, it requests the user's credentials (user and password). Once the user is logged into the integrated authentication system, it tells the application which user is logged in.
     * Since the forum page may include some personal or private information, it is important to make sure only authenticated user can see the forum page.
-    * I'm going to be using passport for user authentication
     * Candidate: 
       * Passport.js (authentication middleware for Node.js)
       * JSON Web Tokens (an open, industry standard RFC 7519 method for representing claims securely between two parties)
