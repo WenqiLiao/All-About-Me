@@ -1,49 +1,42 @@
-The content below is an example project proposal / requirements document. Replace the text below the lines marked "__TODO__" with details specific to your project. Remove the "TODO" lines.
-
-(__TODO__: your project name)
-
-# Shoppy Shoperson 
+# All About Me
 
 ## Overview
 
-(__TODO__: a brief one or two paragraph, high-level description of your project)
+This is my portfolio webisite! when clicking into the website, you can read a brief introduction about me, listen to my favarites songs from spotify, and see the polaroids I took with my friends!
 
-Remembering what to buy at the grocery store is waaaaay too difficult. Also, shopping for groceries when you're hungry leads to regrettable purchases. Sooo... that's where Shoppy Shoperson comes in!
+More importantly, as my friend, you can create your account which will record your birthday, horoscope, email, and your relationship with me!
 
-Shoppy Shoperson is a web app that will allow users to keep track of multiple grocery lists. Users can register and login. Once they're logged in, they can create or view their grocery list. For every list that they have, they can add items to the list or cross off items.
+There is also a discussion forum in this app. You can only see and post comments in this page with an account. You can also filter discussions from which party(self, families, friends)
 
 
 ## Data Model
 
-(__TODO__: a description of your application's data and their relationships to each other) 
 
-The application will store Users, Lists and Items
+The application will store Users and Comments
 
-* users can have multiple lists (via references)
-* each list can have multiple items (by embedding)
+* users can have multiple comments (via references)
 
-(__TODO__: sample documents)
 
 An Example User:
 
 ```javascript
 {
-  username: "shannonshopper",
+  username: "wenqi",
   hash: // a password hash,
-  lists: // an array of references to List documents
+  birthday: "2002-05-25"
+  horoscope: "Gemini"
+  relationship: "self"
+  email: "wl2250@nyu.edu"
+  comments: // an array of references to List documents
 }
 ```
 
-An Example List with Embedded Items:
+An Example Comment:
 
 ```javascript
 {
   user: // a reference to a User object
-  name: "Breakfast foods",
-  items: [
-    { name: "pancakes", quantity: "9876", checked: false},
-    { name: "ramen", quantity: "2", checked: true},
-  ],
+  content: "hi this is the first comment!"
   createdAt: // timestamp
 }
 ```
@@ -51,67 +44,77 @@ An Example List with Embedded Items:
 
 ## [Link to Commented First Draft Schema](db.mjs) 
 
-(__TODO__: create a first draft of your Schemas in db.mjs and link to it)
 
 ## Wireframes
 
-(__TODO__: wireframes for all of the pages on your site; they can be as simple as photos of drawings or you can use a tool like Balsamiq, Omnigraffle, etc.)
+/home - page for introduction, playing music, and list to all sub-pages
 
-/list/create - page for creating a new shopping list
+![home](documentation/readme/intro.jpg)
 
-![list create](documentation/list-create.png)
+/home/polaroid - page for showing all polaroid photos
 
-/list - page for showing all shopping lists
+![home polaroid](documentation/readme/polaroid.jpg)
 
-![list](documentation/list.png)
+/home/sign-up - page for creating a new account
 
-/list/slug - page for showing specific shopping list
+![home sign-up](documentation/readme/signup.jpg)
 
-![list](documentation/list-slug.png)
+/home/log-in - page for logging in with existing account
+
+![home log-in](documentation/readme/login.jpg)
+
+/home/forum - page for users to discuss
+
+![home forum](documentation/readme/forum.jpg)
 
 ## Site map
 
-(__TODO__: draw out a site map that shows how pages are related to each other)
-
-Here's a [complex example from wikipedia](https://upload.wikimedia.org/wikipedia/commons/2/20/Sitemap_google.jpg), but you can create one without the screenshots, drop shadows, etc. ... just names of pages and where they flow to.
+![site map](documentation/readme/sitemap.jpg)
 
 ## User Stories or Use Cases
 
-(__TODO__: write out how your application will be used through [user stories](http://en.wikipedia.org/wiki/User_story#Format) and / or [use cases](https://en.wikipedia.org/wiki/Use_case))
-
+0. as non-registered user, I can only view home page and polaroid page
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
-3. as a user, I can create a new grocery list
-4. as a user, I can view all of the grocery lists I've created in a single list
-5. as a user, I can add items to an existing grocery list
-6. as a user, I can cross off items in an existing grocery list
+3. as a user, I can create a new discussion
+4. as a user, I can delete my own discussion
+5. as a user, I can see all others' discussion
+6. as a user, I can filter discussion with a specific party(families, friends, etc)
 
 ## Research Topics
 
-(__TODO__: the research topics that you're planning on working on along with their point values... and the total points of research topics listed)
-
 * (5 points) Integrate user authentication
+    * The integrated authentication checks whether there is an authenticated user. If not, it requests the user's credentials (user and password). Once the user is logged into the integrated authentication system, it tells the application which user is logged in.
+    * Since the forum page may include some personal or private information, it is important to make sure only authenticated user can see the forum page.
     * I'm going to be using passport for user authentication
-    * And account has been made for testing; I'll email you the password
-    * see <code>cs.nyu.edu/~jversoza/ait-final/register</code> for register page
-    * see <code>cs.nyu.edu/~jversoza/ait-final/login</code> for login page
-* (4 points) Perform client side form validation using a JavaScript library
-    * see <code>cs.nyu.edu/~jversoza/ait-final/my-form</code>
-    * if you put in a number that's greater than 5, an error message will appear in the dom
-* (5 points) vue.js
-    * used vue.js as the frontend framework; it's a challenging library to learn, so I've assigned it 5 points
+    * Candidate: 
+      * Passport.js (authentication middleware for Node.js)
+      * JSON Web Tokens (an open, industry standard RFC 7519 method for representing claims securely between two parties)
 
-10 points total out of 8 required points (___TODO__: addtional points will __not__ count for extra credit)
+* (3 points) Perform client side form validation using a JavaScript library
+    * Before submitting data to the server, it is important to ensure all required form controls are filled out, in the correct format
+    * When creating account. the user must fill out username, password, and email
+    * If the user input something wrong, the error message will appears near the input field
+    * Candidate: 
+      * Built-in form validation (required, type, pattern, etc.)
+
+* (1 point) Spotify API
+    * Bring music from Spotify to my web-app. Play music directly in the web browser, with the Web Playback SDK.
+    * Share my favorite songs with my friends.
+    * Candidate:
+      * Spotify Web Playback SDK
+
+
+
+9 points total out of 8 required points 
 
 
 ## [Link to Initial Main Project File](app.mjs) 
 
-(__TODO__: create a skeleton Express application with a package.json, app.mjs, views folder, etc. ... and link to your initial app.mjs)
-
 ## Annotations / References Used
 
-(__TODO__: list any tutorials/references/etc. that you've based your code off of)
-
-1. [passport.js authentication docs](http://passportjs.org/docs) - (add link to source code that was based on this)
-2. [tutorial on vue.js](https://vuejs.org/v2/guide/) - (add link to source code that was based on this)
+1. [passport.js authentication docs](http://passportjs.org/docs)
+2. [tutorial on handling Authentication and Authorization with Node (using JWT)](https://medium.com/quick-code/handling-authentication-and-authorization-with-node-7f9548fedde8)
+3. [mdn client-side form validation doc](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
+4. [spofity api for developer doc](https://developer.spotify.com/documentation/web-api/libraries/)
 
