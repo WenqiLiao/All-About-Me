@@ -9,7 +9,6 @@ const UserSchema = new mongoose.Schema({
     horoscope: {type: String, required: false},
     relationship: {type: String, required: true},
     email: {type: String, required: true},
-    comments: [{type: mongoose.Schema.Types.ObjectId, ref:'Comment'}]
 });
 
 const CommentSchema = new mongoose.Schema({
@@ -18,6 +17,7 @@ const CommentSchema = new mongoose.Schema({
     createdAt: {type: Timestamp, required: false}
 });
 
+/*
 //using a pre save hook to modify the password before it is saved
 UserSchema.pre('save', async function(next) {
     try {
@@ -36,7 +36,7 @@ UserSchema.pre('save', async function(next) {
       return next(error);
     }
   });
-
+*/
 mongoose.model('User', UserSchema);
 mongoose.model('Comment', CommentSchema);
 
