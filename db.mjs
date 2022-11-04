@@ -1,5 +1,6 @@
 import { Timestamp } from "bson";
 import mongoose from "mongoose";
+import bcrypt from 'bcryptjs';
 
 const UserSchema = new mongoose.Schema({
     username: {type: String, required: true},
@@ -22,6 +23,7 @@ UserSchema.pre('save', async function(next) {
     try {
       // check method of registration
       const user = this;
+      //Use isModified to check whether the password is changing since you only need to hash new passwords
       if (!user.isModified('password')) next();
       // generate salt
       const salt = await bcrypt.genSalt(10);
