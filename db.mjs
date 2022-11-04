@@ -17,6 +17,24 @@ const CommentSchema = new mongoose.Schema({
     createdAt: {type: Timestamp, required: false}
 });
 
+//using a pre save hook to modify the password before it is saved
+UserSchema.pre('save', async function(next) {
+    try {
+      // check method of registration
+      const user = this;
+      if (!user.isModified('password')) next();
+      // generate salt
+      const salt = await bcrypt.genSalt(10);
+      // hash the password
+      const hashedPassword = await bcrypt.hash(this.password, salt);
+      // replace plain text password with hashed password
+      this.password = hashedPassword;
+      next();
+    } catch (error) {
+      return next(error);
+    }
+  });
+
 mongoose.model('User', UserSchema);
 mongoose.model('Comment', CommentSchema);
 
