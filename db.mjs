@@ -1,6 +1,6 @@
 import { Timestamp } from "bson";
 import mongoose from "mongoose";
-import passportLocalMonggose from "passport-local-mongoose";
+import passportLocalMongoose from "passport-local-mongoose";
 
 const UserSchema = new mongoose.Schema({
     username: {type: String, required: true},
