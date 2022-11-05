@@ -1,6 +1,6 @@
 import { Timestamp } from "bson";
 import mongoose from "mongoose";
-import bcrypt from 'bcryptjs';
+import passportLocalMonggose from "passport-local-mongoose";
 
 const UserSchema = new mongoose.Schema({
     username: {type: String, required: true},
@@ -17,26 +17,8 @@ const CommentSchema = new mongoose.Schema({
     createdAt: {type: Timestamp, required: false}
 });
 
-/*
-//using a pre save hook to modify the password before it is saved
-UserSchema.pre('save', async function(next) {
-    try {
-      // check method of registration
-      const user = this;
-      //Use isModified to check whether the password is changing since you only need to hash new passwords
-      if (!user.isModified('password')) next();
-      // generate salt
-      const salt = await bcrypt.genSalt(10);
-      // hash the password
-      const hashedPassword = await bcrypt.hash(this.password, salt);
-      // replace plain text password with hashed password
-      this.password = hashedPassword;
-      next();
-    } catch (error) {
-      return next(error);
-    }
-  });
-*/
+UserSchema.plugin(passportLocalMongoose);
+
 mongoose.model('User', UserSchema);
 mongoose.model('Comment', CommentSchema);
 
@@ -61,5 +43,10 @@ if (process.env.NODE_ENV === 'PRODUCTION') {
  dbconf = 'mongodb://localhost/wl2250';
 }
 
-mongoose.connect(dbconf);
+mongoose.connect(dbconf), {
+    // avoid deprecation warnings from the native MongoDB driver
+    useNewUrlParser: true,
+    // set to avoid deprecation warnings
+    useUnifiedTopology: true
+};
 
