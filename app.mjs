@@ -30,6 +30,22 @@ app.get('/', (req, res) => {
       res.render('index', {user: req.session.user, home: true});
 });
 
+//go to forum page
+app.get('/forum', (req, res) => {
+    res.render('forum');
+});
+
+app.post('/dragon', (req, res) => {
+    if(req.body.dragonName.length > 0) {
+      dragons.push({dragonName: req.body.dragonName, rider: req.body.rider, identification: req.body.identification, house: req.body.house});
+      req.session.addCount = (req.session.addCount || 0) + 1;
+      //console.log('inside dragon '+ req.session.addCount);
+      res.redirect('/');
+    } else {
+      res.render('dragon', {dragons, error: 'name is not valid'});
+    }
+  });
+
 
 
 
