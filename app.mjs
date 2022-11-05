@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser';
 import session from 'express-session';
 import passport from 'passport';
-import connectEnsureLogin from 'connectEnsureLogin';
+import connectEnsureLogin from 'connect-ensure-login';
 import './db.mjs';
 import path from 'path'
 import mongoose from 'mongoose'; 
