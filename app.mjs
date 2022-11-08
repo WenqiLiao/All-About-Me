@@ -99,6 +99,7 @@ app.get('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
     res.render('forum', {user:req.user});
 });
 
+
 // a test forum page without logging in 
 const testComments = [
     {author: 'Wenqi', content: 'This is a test comment'},
