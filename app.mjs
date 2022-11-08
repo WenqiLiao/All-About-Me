@@ -117,11 +117,4 @@ app.post('/test', (req, res) => {
     }
 });
 
-app.post('/removetodo', function (req, res, next) {
-    if(expArr[req.body.id]) {
-      delete expArr[req.body.id];
-    }
-    res.redirect("/");
-});
-
 app.listen(process.env.PORT || 3000);
