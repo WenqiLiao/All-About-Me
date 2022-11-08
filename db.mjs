@@ -3,16 +3,16 @@ import mongoose from "mongoose";
 import passportLocalMongoose from "passport-local-mongoose";
 
 const UserSchema = new mongoose.Schema({
-    username: {type: String, required: true},
-    password: {type: String, required: true},
+    name: {type: String, required: true},
+    password: {type: String},
     //birthday: {type: Timestamp, required: false},
     horoscope: {type: String, required: false},
     relationship: {type: String, required: true},
-    email: {type: String, required: true},
+    username: {type: String, required: true},
 });
 
 const CommentSchema = new mongoose.Schema({
-    username: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
+    name: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
     content: {type: String, required: true},
     //createdAt: {type: Timestamp, required: false}
 });

@@ -1,0 +1,30 @@
+
+<!DOCTYPE HTML> 
+<html> 
+    <body>
+        <form method="POST" action="">
+            <div>
+                <span>Author</span>
+                <input type="text", name="author"></div>
+            <div>
+                <span>Content</span>
+                <input type="text", name="content"></div>
+            <div><input type="submit", class="button", value="add comment"></div>
+        </form>
+        <h3>Test Comments</h3>
+        <table>
+            <thead>
+                <th>Author</th>
+                <th>Comment</th>
+            </thead>
+            <tbody>
+                {{#each testComments}}
+                    <tr>
+                        <td>{{author}}</td>
+                        <td>{{content}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </body> 
+</html>

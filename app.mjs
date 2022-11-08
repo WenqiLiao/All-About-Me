@@ -26,7 +26,7 @@ app.use(session({
 }));
 // make {{user}} variable available for all paths
 app.use((req, res, next) => {
-    res.locals.user = req.session.user;
+    res.locals.user = req.user;
     next();
 });
 // Middleware to use Passport with Express
@@ -42,33 +42,86 @@ passport.deserializeUser(User.deserializeUser());
 
 // go to home page
 app.get('/', (req, res) => {
-      res.render('index', {user: req.user, home: true});
+    res.render('index', {user: req.user, home: true});
+});
+// go to register page
+app.get('/register', (req, res) => {
+    res.render('register');
+});
+// register a new user
+app.post('/register', (req, res) => {
+    const newUser = new User({
+        username: req.body.email,
+        name: req.body.name,
+        horoscope: req.body.horoscope,
+        relationship: req.body.relationship
+    });
+    User.register(newUser, req.body.password, function(err, user){
+        if(err){
+            console.log(err); 
+            //res.redirect("/register");
+        } else {
+            //A new user was saved
+            console.log(user + "2");
+            passport.authenticate('local', function (error, user, info) {
+                // this will execute in any case, even if a passport strategy will find an error
+                // log everything to console
+                console.log(error);
+                console.log(user);
+                console.log(info);
+          
+                if (error) {
+                  res.status(401).send(error);
+                  return;
+                } else if (!user) {
+                  res.status(401).send(info);
+                  return;
+                } else {
+                  next();
+                }
+          
+                res.status(401).send(info);
+              })(req, res);
+        }
+    });
 });
 // go to login page
 app.get('/login', (req, res) => {
     res.render('login');
   });
 // log in as user
-app.post('/login', passport.authenticate('local', { failureRedirect: '/' }),  function(req, res) {
+app.post('/login', passport.authenticate('local', { failureRedirect: '/', failureMessage: true }),  function(req, res) {
 	console.log(req.user)
-	res.redirect('/');
+	res.redirect('/forum');
 });
 // go to forum page
 app.get('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
     res.render('forum', {user:req.user});
 });
-/*
-app.post('/dragon', (req, res) => {
-    if(req.body.dragonName.length > 0) {
-      dragons.push({dragonName: req.body.dragonName, rider: req.body.rider, identification: req.body.identification, house: req.body.house});
-      req.session.addCount = (req.session.addCount || 0) + 1;
-      //console.log('inside dragon '+ req.session.addCount);
-      res.redirect('/');
-    } else {
-      res.render('dragon', {dragons, error: 'name is not valid'});
-    }
-  });
-*/
 
+// a test forum page without logging in 
+const testComments = [
+    {author: 'Wenqi', content: 'This is a test comment'},
+];
+
+app.get('/test', (req, res) => {
+    res.render('test', {testComments});
+});
+
+app.post('/test', (req, res) => {
+    if(req.body.author.length > 0 && req.body.content > 0) {
+      testComments.push({author: req.body.author, content: req.body.content});
+      res.redirect('/test');
+    } else {
+      res.render('test', {testComments, error: 'name is not valid'});
+    }
+});
+
+app.post('/removetodo', function (req, res, next) {
+    if(expArr[req.body.id]) {
+      delete expArr[req.body.id];
+    }
+    res.redirect("/");
+});
 
 app.listen(process.env.PORT || 3000);
