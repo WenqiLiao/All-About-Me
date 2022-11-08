@@ -101,12 +101,32 @@ app.get('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
 
 
 // a test forum page without logging in 
+/*
 const testComments = [
     {author: 'Wenqi', content: 'This is a test comment'},
 ];
+*/
 
 app.get('/test', (req, res) => {
-    res.render('test', {testComments});
+    Comment.find({}).sort('-createdAt').exec((err, comments) => {
+        res.render('test', {comments: comments});
+    });
+});
+app.post('/test', (req, res) => {
+    const cmt = new Comment({
+        author: req.body.author,
+        content: req.body.content
+      });
+      cmt.save(function (err) {
+        if (err) {
+          res.render('test', {message: 'error occurs'});
+        } else {
+            console.log("save");
+            Comment.find({}).sort('-createdAt').exec((err, comments) => {
+                res.render('test', {comments: comments});
+            });
+        }
+      });
 });
 
 app.post('/test', (req, res) => {
