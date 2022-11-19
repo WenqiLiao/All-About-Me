@@ -12,8 +12,10 @@ const UserSchema = new mongoose.Schema({
 });
 
 const CommentSchema = new mongoose.Schema({
-    //name: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
-    author: {type: String, required: true},
+    author: {type: mongoose.Schema.Types.ObjectId, ref:'User'},
+    authorName: {type: String, required: true},
+    authorHoroscope: {type: String, required: false},
+    authorRelationship: {type: String, required: true},
     content: {type: String, required: true},
     //createdAt: {type: Timestamp, required: false}
 });

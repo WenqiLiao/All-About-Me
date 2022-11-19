@@ -25,22 +25,18 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
 }));
-// make {{user}} variable available for all paths
+
+// make {{user}} variable available for all paths [not working]
 app.use((req, res, next) => {
     res.locals.user = req.session.user;
     next();
 });
+
 // Middleware to use Passport with Express
 app.use(passport.initialize());
 // Needed to use express-session with passport
 app.use(passport.session());
-// passport local strategy
-// passport.use(User.createStrategy());
-/*
-// to use with sessions
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
-*/
+
 // go to home page
 app.get('/', (req, res) => {
     res.render('index', {user:req.user});
@@ -87,7 +83,30 @@ app.post('/login', function(req, res, next) {
 
 // go to forum page
 app.get('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
-    res.render('forum', {user:req.user});
+  Comment.find({}).sort('-createdAt').exec((err, comments) => {
+    res.render('forum', {comments: comments});
+});
+});
+app.post('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
+  console.log("ever");
+  console.log("body", req.body);
+  const cmt = new Comment ({
+    author: req.user._id,
+    authorName: req.user.name,
+    authorHoroscope: req.user.horoscope,
+    authorRelationship: req.user.relationship,
+    content: req.body.comment
+  })
+  cmt.save(function (err) {
+    if (err) {
+      res.render('forum', {message: 'error occurs'});
+    } else {
+        console.log("save");
+        Comment.find({}).sort('-createdAt').exec((err, comments) => {
+            res.render('forum', {comments: comments});
+        });
+    }
+  });
 });
 
 app.get('/test', (req, res) => {

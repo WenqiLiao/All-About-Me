@@ -1,1 +1,27 @@
-<h1> {{user.username}} get here!</h1>
+<div> Create your comment below! </div>
+<form method= "POST" action="">
+    <div>
+		<label for="comment">Comment:</label>
+		<textarea name="comment" id="comment"></textarea>
+	</div>
+    <input type="submit", value="submit">
+</form>
+<h3>Test Comments</h3>
+        <table>
+            <thead>
+                <th>Author</th>
+                <th>Horoscope</th>
+                <th>Relationship</th>
+                <th>Comment</th>
+            </thead>
+            <tbody>
+                {{#each comments}}
+                    <tr>
+                        <td>{{authorName}}</td>
+                        <td>{{authorHoroscope}}</td>
+                        <td>{{authorRelationship}}</td>
+                        <td>{{content}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
