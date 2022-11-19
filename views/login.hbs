@@ -4,10 +4,13 @@
 	<title>Example Login Form</title>
   </head>
   <body>
+	{{#if message}}
+        {{message}}
+    {{/if}}
 	<form action="" method="post">
   	  <!-- user input-->
   	  Email:<br>
-  	  <input type="text" name="username" placeholder="Username" required><br><br>
+  	  <input type="text" name="email" placeholder="Username" required><br><br>
   	  Password:<br>
   	  <input type="password" name="password" placeholder="Password" required><br><br>
   	  <!-- submit button -->

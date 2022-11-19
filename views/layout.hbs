@@ -11,6 +11,11 @@
         <header>
             <title>MyCher's World</title>
         </header>
+
+        {{#if user}}
+        Logged in as {{user.name}}
+        {{/if}}
+        
 		{{{ body }}}
         <!--Footer-->
         <footer>
