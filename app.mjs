@@ -47,6 +47,7 @@ app.get('/register', (req, res) => {
 });
 // register a new user
 app.post('/register', (req, res) => {
+  console.log("body", req.body);
     const newUser = new User({
         username: req.body.email,
         name: req.body.name,
@@ -55,7 +56,8 @@ app.post('/register', (req, res) => {
     });
     User.register(newUser, req.body.password, function(err, user){
         if(err){
-          res.render('register',{user:req.user, message:'Your registration information is not valid'});
+          console.log("err", err);
+          res.render('register',{user: req.user, message:'Your registration information is not valid'});
         } else {
           passport.authenticate('local')(req, res, function() {
             res.redirect('/');
