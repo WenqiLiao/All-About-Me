@@ -4,14 +4,29 @@
 	<title>Example Register Form</title>
   </head>
   <body>
+  <script src="/javascripts/validation.js" type="module" defer></script>
+  <h2>
+    {{#if message}}
+        {{message}}
+    {{/if}}
+  </h2>
 	<form action="" method="post">
   	  <!-- user input-->
+      <li name="nameRule">
+        Username MUST be at least 2 characters long
+      </li>
       Name:<br>
   	  <input type="text" name="name" placeholder="Name" required><br><br>
+      <li name="emailRule">
+        Email MUST be a valid email
+      </li>
   	  Email:<br>
-  	  <input type="text" name="email" placeholder="Email" required><br><br>
+  	  <input type="email" name="email" placeholder="Email" required><br><br>
+      <li name="pwdRule1">
+        Password MUST be at least 8 characters long
+      </li>
   	  Password:<br>
-  	  <input type="text" name="password" placeholder="Password" required><br><br>
+  	  <input type="password" name="password" placeholder="Password" required><br><br>
       Horoscope:<br>
   	  <select name="horoscope">
         <option value="Aries">Aries</option>

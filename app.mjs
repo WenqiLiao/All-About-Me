@@ -60,7 +60,7 @@ app.post('/register', (req, res) => {
     User.register(newUser, req.body.password, function(err, user){
         if(err){
           console.log("err", err);
-          res.render('register',{user: req.user, message:'Your registration information is not valid'});
+          res.render('register',{user: req.user, message:'The email is already in use'});
         } else {
           passport.authenticate('local')(req, res, function() {
             res.redirect('/');
@@ -146,6 +146,13 @@ app.post('/api/category', async (req, res) => {
     console.log("error", e);
     res.json({status: 'error'});
   }
+});
+
+app.get('/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) { return next(err); }
+    res.redirect('/');
+  });
 });
 
 /*
