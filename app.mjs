@@ -18,7 +18,10 @@ const __dirname = path.dirname(__filename);
 
 app.set('view engine', 'hbs');
 
+app.use('/javascripts', express.static(__dirname + './../public/javascripts'));
+
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({
     secret: 'dont know what',
@@ -47,7 +50,7 @@ app.get('/register', (req, res) => {
 });
 // register a new user
 app.post('/register', (req, res) => {
-  console.log("body", req.body);
+  //console.log("body", req.body);
     const newUser = new User({
         username: req.body.email,
         name: req.body.name,
@@ -90,8 +93,8 @@ app.get('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
 });
 });
 app.post('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
-  console.log("ever");
-  console.log("body", req.body);
+  //console.log("ever");
+  //console.log("body", req.body);
   const cmt = new Comment ({
     author: req.user._id,
     authorName: req.user.name,
@@ -111,6 +114,39 @@ app.post('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   });
 });
 
+app.get('/api/category', async (req, res) => {
+  const comments = await Comment.find({}).exec();
+  //console.log("comments in api", comments);
+  res.json(comments.map(c => {
+    //console.log("user1", u.initial);
+    return {author: c.author, authorName: c.authorName, horoscope: c.authorHoroscope, relationship: c.authorRelationship, content: c.content};
+  }));
+});
+app.post('/api/category', async (req, res) => {
+  //console.log('api body', req.body);
+  try {
+    const category = req.body.category;
+    //console.log("category", category);
+    let comments;
+    if (category === 'mine') {
+      comments = await Comment.find({author: req.user._id}).exec();
+    } else if (category === 'friend') {
+      comments = await Comment.find({authorRelationship: category}).exec();
+    } else if (category === 'family') {
+      comments = await Comment.find({authorRelationship: category}).exec();
+    }
+    console.log("comments", comments);
+    res.json(comments.map(c => {
+      return {author: c.author, authorName: c.authorName, horoscope: c.authorHoroscope, relationship: c.authorRelationship, content: c.content};
+    }));
+    
+  } catch(e) {
+    console.log("error", e);
+    res.json({status: 'error'});
+  }
+});
+
+/*
 app.get('/test', (req, res) => {
     Comment.find({}).sort('-createdAt').exec((err, comments) => {
         res.render('test', {comments: comments});
@@ -125,7 +161,6 @@ app.post('/test', (req, res) => {
         if (err) {
           res.render('test', {message: 'error occurs'});
         } else {
-            console.log("save");
             Comment.find({}).sort('-createdAt').exec((err, comments) => {
                 res.render('test', {comments: comments});
             });
@@ -141,5 +176,5 @@ app.post('/test', (req, res) => {
       res.render('test', {testComments, error: 'name is not valid'});
     }
 });
-
+*/
 app.listen(process.env.PORT || 3000);

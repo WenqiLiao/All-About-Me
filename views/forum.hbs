@@ -1,27 +1,29 @@
-<div> Create your comment below! </div>
+<script src="/javascripts/main.js" type="module" defer></script>
+<form method="POST" action="">
+    <select class="filter">
+        <option value="mine">mine</option>
+        <option value="friend">friend</option>
+        <option value="family">family</option>
+    </select>
+    <input type="submit" value="search" class="filterBtn">
+</form>
+<h1> Create your comment below! </h1>
 <form method= "POST" action="">
     <div>
 		<label for="comment">Comment:</label>
 		<textarea name="comment" id="comment"></textarea>
 	</div>
-    <input type="submit", value="submit">
+    <input type="submit" value="submit">
 </form>
 <h3>Test Comments</h3>
-        <table>
-            <thead>
-                <th>Author</th>
-                <th>Horoscope</th>
-                <th>Relationship</th>
-                <th>Comment</th>
-            </thead>
-            <tbody>
-                {{#each comments}}
-                    <tr>
-                        <td>{{authorName}}</td>
-                        <td>{{authorHoroscope}}</td>
-                        <td>{{authorRelationship}}</td>
-                        <td>{{content}}</td>
-                    </tr>
-                {{/each}}
-            </tbody>
-        </table>
+    <div class="commentsTable">
+        {{#each comments}}
+            <div>
+                <div>{{authorName}}</div>
+                <div>{{authorHoroscope}}</div>
+                <div>{{authorRelationship}}</div>
+                <div>{{content}}</div>
+                <br>
+            </div>
+        {{/each}}
+    </div>
