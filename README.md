@@ -21,13 +21,11 @@ An Example User:
 
 ```javascript
 {
-  username: "wenqi",
+  name: "wenqi",
   hash: // a password hash,
-  birthday: "2002-05-25"
   horoscope: "Gemini"
   relationship: "self"
   email: "wl2250@nyu.edu"
-  comments: // an array of references to List documents
 }
 ```
 
@@ -35,9 +33,11 @@ An Example Comment:
 
 ```javascript
 {
-  user: // a reference to a User object
+  author: // a reference to a User object
+  authorName: "Wenqi",
+  authorHoroscope: "Gemini",
+  authorRelationship: "self",
   content: "hi this is the first comment!"
-  createdAt: // timestamp
 }
 ```
 
