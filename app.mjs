@@ -134,8 +134,10 @@ app.post('/api/category', async (req, res) => {
       comments = await Comment.find({authorRelationship: category}).exec();
     } else if (category === 'family') {
       comments = await Comment.find({authorRelationship: category}).exec();
+    } else if (category === 'all') {
+      comments = await Comment.find({}).exec();
     }
-    console.log("comments", comments);
+    //console.log("comments", comments);
     res.json(comments.map(c => {
       return {author: c.author, authorName: c.authorName, horoscope: c.authorHoroscope, relationship: c.authorRelationship, content: c.content};
     }));

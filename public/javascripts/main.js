@@ -29,7 +29,7 @@ const doFilter = async(parsed) => {
 const handleInput = async (evt) => {
     evt.preventDefault();
     const category = document.getElementsByClassName('filter')[0].value;
-    console.log("category", category);
+    //console.log("category", category);
     const res = await fetch('/api/category', {
         method: 'POST',
         headers: {
@@ -38,7 +38,7 @@ const handleInput = async (evt) => {
         body: JSON.stringify({category})
     });
     const parsed = await res.json();
-    console.log("parsed", parsed);
+    //console.log("parsed", parsed);
     doFilter(parsed);
 }
 
