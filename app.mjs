@@ -29,12 +29,13 @@ app.use(session({
     saveUninitialized: true,
 }));
 
+/*
 // make {{user}} variable available for all paths [not working]
 app.use((req, res, next) => {
     res.locals.user = req.session.user;
     next();
 });
-
+*/
 // Middleware to use Passport with Express
 app.use(passport.initialize());
 // Needed to use express-session with passport
@@ -43,6 +44,10 @@ app.use(passport.session());
 // go to home page
 app.get('/', (req, res) => {
     res.render('index', {user:req.user});
+});
+// go to polaroid page
+app.get('/polaroid', (req, res) => {
+  res.render('polaroid', {user:req.user});
 });
 // go to register page
 app.get('/register', (req, res) => {
@@ -89,7 +94,7 @@ app.post('/login', function(req, res, next) {
 // go to forum page
 app.get('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
   Comment.find({}).sort('-createdAt').exec((err, comments) => {
-    res.render('forum', {comments: comments});
+    res.render('forum', {comments: comments, user:req.user});
 });
 });
 app.post('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
@@ -108,7 +113,7 @@ app.post('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
     } else {
         console.log("save");
         Comment.find({}).sort('-createdAt').exec((err, comments) => {
-            res.render('forum', {comments: comments});
+            res.render('forum', {comments: comments, user:req.user});
         });
     }
   });
@@ -155,35 +160,4 @@ app.get('/logout', function(req, res, next) {
   });
 });
 
-/*
-app.get('/test', (req, res) => {
-    Comment.find({}).sort('-createdAt').exec((err, comments) => {
-        res.render('test', {comments: comments});
-    });
-});
-app.post('/test', (req, res) => {
-    const cmt = new Comment({
-        author: req.body.author,
-        content: req.body.content
-      });
-      cmt.save(function (err) {
-        if (err) {
-          res.render('test', {message: 'error occurs'});
-        } else {
-            Comment.find({}).sort('-createdAt').exec((err, comments) => {
-                res.render('test', {comments: comments});
-            });
-        }
-      });
-});
-
-app.post('/test', (req, res) => {
-    if(req.body.author.length > 0 && req.body.content > 0) {
-      testComments.push({author: req.body.author, content: req.body.content});
-      res.redirect('/test');
-    } else {
-      res.render('test', {testComments, error: 'name is not valid'});
-    }
-});
-*/
 app.listen(process.env.PORT || 3000);

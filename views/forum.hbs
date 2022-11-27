@@ -1,4 +1,5 @@
 <script src="/javascripts/main.js" type="module" defer></script>
+<h3>You can filter the comments by any relationship with me!<h3>
 <form method="POST" action="">
     <select class="filter">
         <option value="all">all</option>
@@ -8,7 +9,7 @@
     </select>
     <input type="submit" value="search" class="filterBtn">
 </form>
-<h1> Create your comment below! </h1>
+<h3> Create your comment below! </h3>
 <form method= "POST" action="">
     <div>
 		<label for="comment">Comment:</label>
@@ -19,12 +20,13 @@
 <h3>Test Comments</h3>
     <div class="commentsTable">
         {{#each comments}}
-            <div>
-                <div>{{authorName}}</div>
-                <div>{{authorHoroscope}}</div>
-                <div>{{authorRelationship}}</div>
+            <div class="commentsEle">
+                <div class="commentsName">{{authorName}}</div>
+                <div class="comments">{{authorHoroscope}}</div>
+                <div class="comments">{{authorRelationship}}</div>
                 <div>{{content}}</div>
                 <br>
             </div>
         {{/each}}
     </div>
+
