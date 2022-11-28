@@ -2,6 +2,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.1",
+    "chai": "^4.3.7",
     "connect-ensure-login": "^0.1.1",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
@@ -29,5 +30,8 @@
   "bugs": {
     "url": "https://github.com/nyu-csci-ua-0467-001-002-fall-2022/final-project-WenqiLiao/issues"
   },
-  "homepage": "https://github.com/nyu-csci-ua-0467-001-002-fall-2022/final-project-WenqiLiao#readme"
+  "homepage": "https://github.com/nyu-csci-ua-0467-001-002-fall-2022/final-project-WenqiLiao#readme",
+  "devDependencies": {
+    "mocha": "^10.1.0"
+  }
 }
