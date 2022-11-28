@@ -71,11 +71,13 @@ button {
     height: 8px;
     cursor: pointer;
     background: lightgray;
+    color: lightgray;
     border-radius: 100%;
 }
   
 .dots div.clicked {
     background-color: gray;
+    color: gray;
 }
   
 .slides {

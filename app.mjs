@@ -29,13 +29,6 @@ app.use(session({
     saveUninitialized: true,
 }));
 
-/*
-// make {{user}} variable available for all paths [not working]
-app.use((req, res, next) => {
-    res.locals.user = req.session.user;
-    next();
-});
-*/
 // Middleware to use Passport with Express
 app.use(passport.initialize());
 // Needed to use express-session with passport
@@ -123,7 +116,6 @@ app.get('/api/category', async (req, res) => {
   const comments = await Comment.find({}).exec();
   //console.log("comments in api", comments);
   res.json(comments.map(c => {
-    //console.log("user1", u.initial);
     return {author: c.author, authorName: c.authorName, horoscope: c.authorHoroscope, relationship: c.authorRelationship, content: c.content};
   }));
 });

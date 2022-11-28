@@ -1,32 +1,34 @@
-const gallery = document.querySelector('.slides');
-const slides = gallery.querySelectorAll('div');
-const dots = document.querySelector('.dots');
-const slideCount = slides.length;
-const slideWidth = 540;
+document.addEventListener("DOMContentLoaded", function () {
+  const gallery = document.getElementsByClassName('slides')[0];
+  const slides = gallery.querySelectorAll('div');
+  const dots = document.getElementsByClassName('dots')[0];
+  const slideWidth = 540;
 
-const clickedDots = () => {
-  dots
-    .querySelectorAll('div.clicked')
-    .forEach(d => d.classList.remove('clicked'));
-  const index = Math.floor(gallery.scrollLeft / slideWidth);
-  dots
-    .querySelector(`div[data-id="${index}"]`)
-    .classList.add('clicked');
-};
+  dots.innerHTML += [...slides]
+    .map((slide, i) => `<div data-id="${i}"></div>`)
+    .join('');
 
-const scrollToElement = e => {
-  const index = parseInt(e.dataset.id, 10);
-  gallery.scrollTo(index * slideWidth, 0);
-};
+  dots.querySelectorAll('div').forEach(d => {
+    d.addEventListener('click', () => toCertainDot(d));
+  });
 
-dots.innerHTML += [...slides]
-  .map((slide, i) => `<div data-id="${i}"></div>`)
-  .join('');
+  gallery.addEventListener('scroll', e => clickedDots());
 
-dots.querySelectorAll('div').forEach(d => {
-  d.addEventListener('click', () => scrollToElement(d));
+  clickedDots();
+
+  function clickedDots() {
+    dots
+      .getElementsByClassName('clicked')
+      .forEach(d => d.classList.remove('clicked'));
+    const crt = Math.floor(gallery.scrollLeft / slideWidth);
+    dots
+      .querySelector(`div[data-id="${crt}"]`)
+      .classList.add('clicked');
+  };
+  
+  function toCertainDot(e) {
+    const crt = parseInt(e.dataset.id, 10);
+    gallery.scrollTo(crt * slideWidth, 0);
+  };
+
 });
-
-gallery.addEventListener('scroll', e => clickedDots());
-
-clickedDots();

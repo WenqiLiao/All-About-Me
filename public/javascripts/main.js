@@ -1,13 +1,5 @@
 const doFilter = async(parsed) => {
 
-    /*
-    const res = await fetch('/api/category');
-    console.log("res", res);
-    const comments = await res.json();
-    console.log("comments", comments);
-    */
-    //delete all rows first
-
     let table = document.getElementsByClassName('commentsTable')[0];
     table.innerHTML = '';
 
