@@ -77,9 +77,8 @@ An Example Comment:
 1. as non-registered user, I can register a new account with the site
 2. as a user, I can log in to the site
 3. as a user, I can create a new discussion
-4. as a user, I can delete my own discussion
-5. as a user, I can see all others' discussion
-6. as a user, I can filter discussion with a specific party(families, friends, etc)
+4. as a user, I can see all others' discussion
+5. as a user, I can filter discussion with a specific party(families, friends, etc)
 
 ## Research Topics
 
@@ -95,13 +94,14 @@ An Example Comment:
     * When creating account. the user must fill out username, password, and email
     * If the user input something wrong, the error message will appears near the input field
     * Candidate: 
-      * Built-in form validation (required, type, pattern, etc.)
+      * custom JavaScript
 
-* (1 point) Spotify API
-    * Bring music from Spotify to my web-app. Play music directly in the web browser, with the Web Playback SDK.
+* (1 point) Song player SDK
+    * Bring music to my web-app. Play music directly in the web browser, with the Web Playback SDK.
     * Share my favorite songs with my friends.
     * Candidate:
       * Spotify Web Playback SDK
+      * Deezer SDK
 
 
 
@@ -116,4 +116,5 @@ An Example Comment:
 2. [tutorial on handling Authentication and Authorization with Node (using JWT)](https://medium.com/quick-code/handling-authentication-and-authorization-with-node-7f9548fedde8)
 3. [mdn client-side form validation doc](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
 4. [spofity api for developer doc](https://developer.spotify.com/documentation/web-api/libraries/)
+5. [deezer sdk](https://developers.deezer.com/login?redirect=/sdk/javascript)
 

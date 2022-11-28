@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const dots = document.getElementsByClassName('dots')[0];
   const slideWidth = 540;
 
-  dots.innerHTML += [...slides]
-    .map((slide, i) => `<div data-id="${i}"></div>`)
-    .join('');
+  dots.innerHTML = [...slides]
+    .reduce((acc, slide, i) => acc + `<div data-id="${i}"></div>`, '');
+  
 
   dots.querySelectorAll('div').forEach(d => {
     d.addEventListener('click', () => toCertainDot(d));
