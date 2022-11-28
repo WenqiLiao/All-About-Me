@@ -1,3 +1,29 @@
+export function nameHandler(e) {
+  const uname = e.target.value;
+  nameRule.style.color = "red";
+  if (uname.length >= 2) {
+    nameRule.style.color = "green";
+  } 
+}
+
+export function pwdHandler(e) {
+  const pwd = e.target.value;
+  pwdRule1.style.color = "red";
+  if (pwd.length >= 8) {
+    pwdRule1.style.color = "green";
+  }
+}
+
+export function emailHandler(e) {
+    const eml = e.target.value;
+    emailRule.style.color = "red";
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (eml.match(emailRegex)) {
+        emailRule.style.color = "green";
+    }
+}
+
+
 document.addEventListener("DOMContentLoaded", function () {
 
     // DOM Elements
@@ -14,30 +40,4 @@ document.addEventListener("DOMContentLoaded", function () {
     name.addEventListener("input", nameHandler);
     email.addEventListener("input", emailHandler);
     password.addEventListener("input", pwdHandler);
-
-
-    function nameHandler(e) {
-      const uname = e.target.value;
-      nameRule.style.color = "red";
-      if (uname.length >= 2) {
-        nameRule.style.color = "green";
-      } 
-    }
-    
-    function pwdHandler(e) {
-      const pwd = e.target.value;
-      pwdRule1.style.color = "red";
-      if (pwd.length >= 8) {
-        pwdRule1.style.color = "green";
-      }
-    }
-
-    function emailHandler(e) {
-        const eml = e.target.value;
-        emailRule.style.color = "red";
-        const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        if (eml.match(emailRegex)) {
-            emailRule.style.color = "green";
-        }
-    }
 });
