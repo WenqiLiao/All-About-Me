@@ -3,11 +3,6 @@ const validation = require('./public/javascripts/validation.js');
 
 describe('nameHandler', () => {
     it('will be red if the length is shorter than 2', () => {
-        const nameRule = {
-            style: {
-                color: '',
-            }
-        };
         const e = {
             target: {
                 value: "q",

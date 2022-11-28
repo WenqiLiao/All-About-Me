@@ -1,7 +1,8 @@
+<body>
 <div id="dz-root"></div>
+<div id="player" style="width:100%;" align="left"></div>
 <div id="controlers">
-    <input type="button" onclick="DZ.player.playAlbum(302127); return false;" value="Play Daft Punk - Discovery"/>
-    <input type="button" onclick="DZ.player.playAlbum(301775); return false;" value="Play Daft Punk - Homework"/>
+    <input type="button" onclick="DZ.player.playAlbum(349507667); return false;" value="Talk that Talk - TWICE"/>
     <br/>
     <input type="button" onclick="DZ.player.play(); return false;" value="play"/>
     <input type="button" onclick="DZ.player.pause(); return false;" value="pause"/>
@@ -12,7 +13,7 @@
     <input type="button" onclick="DZ.player.setVolume(80); return false;" value="set Volume 80"/>
     <br/><br/><br/>
 </div>
-<div id="slider_seek" class="progressbarplay" style="">
+<div id="slider_seek" class="progressbarplay">
     <div class="bar" style="width: 0%;"></div>
 </div>
 <script>
@@ -30,7 +31,6 @@
         for (var i = 0; i < arguments.length; i++) {
             line.push(arguments[i]);
         }
-        pre.innerHTML += line.join(' ') + "\n";
     }
     function onPlayerLoaded() {
         $("#controlers input").attr('disabled', false);
@@ -48,15 +48,19 @@
         });
     }
     document.addEventListener('DOMContentLoaded', function() {
-        
         DZ.init({
             appId  : '569222',
-            channelUrl : 'http://localhost:3000/channel.html',
+            channelUrl : 'http://developers.deezer.com/examples/channel.php',
             player : {
+                container : 'player',
+                cover : true,
+                // playlist : true,
+                width : 650,
+                height : 150,
                 onload : onPlayerLoaded
             }
         });
     });
 </script><br/>
-event_listener : <br/>
-<pre id="event_listener" style="height:100px;overflow:auto;"></pre>
+<pre id="event_listener" style="height:100px;overflow:auto;display:none"></pre>
+</body>
