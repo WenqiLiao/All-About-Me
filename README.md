@@ -96,6 +96,12 @@ An Example Comment:
     * Candidate: 
       * custom JavaScript
 
+* (3 points) Unit testing with JavaScript
+    * Make sure the client side form validation work as as expected (need to satisfy the requirment for name, email, and password input)
+    * Make sure the new-created user will be saved only if all required fields are filled
+    * Candidate: 
+      * Mocha
+
 * (1 point) Song player SDK
     * Bring music to my web-app. Play music directly in the web browser, with the Web Playback SDK.
     * Share my favorite songs with my friends.
@@ -105,7 +111,7 @@ An Example Comment:
 
 
 
-9 points total out of 8 required points 
+12 points total out of 10 required points 
 
 
 ## [Link to Initial Main Project File](app.mjs) 
@@ -117,4 +123,5 @@ An Example Comment:
 3. [mdn client-side form validation doc](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
 4. [spofity api for developer doc](https://developer.spotify.com/documentation/web-api/libraries/)
 5. [deezer sdk](https://developers.deezer.com/login?redirect=/sdk/javascript)
+6. [mocha documentation](https://mochajs.org/)
 
