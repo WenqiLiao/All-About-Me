@@ -89,7 +89,7 @@ An Example Comment:
       * Passport.js (authentication middleware for Node.js)
       * JSON Web Tokens (an open, industry standard RFC 7519 method for representing claims securely between two parties)
 
-* (3 points) Perform client side form validation using a JavaScript library
+* (3 points) Perform client side form validation using a custom JavaScript
     * Before submitting data to the server, it is important to ensure all required form controls are filled out, in the correct format
     * When creating account. the user must fill out username, password, and email
     * If the user input something wrong, the error message will appears near the input field
