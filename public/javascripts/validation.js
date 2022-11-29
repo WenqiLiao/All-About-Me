@@ -17,7 +17,6 @@
 
   }
 
-
   function nameHandler(e) {
     const nameRule = document.getElementsByName("nameRule")[0];
     const uname = e.target.value;
@@ -44,4 +43,11 @@
       if (eml.match(emailRegex)) {
           emailRule.style.color = "green";
       }
+  }
+
+ module.exports = {
+    nameHandler,
+    pwdHandler,
+    emailHandler
+    
   }
