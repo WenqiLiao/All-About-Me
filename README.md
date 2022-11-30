@@ -79,6 +79,7 @@ An Example Comment:
 3. as a user, I can create a new discussion
 4. as a user, I can see all others' discussion
 5. as a user, I can filter discussion with a specific party(families, friends, etc)
+6. as a user, I can delete my post
 
 ## Research Topics
 
