@@ -12,6 +12,7 @@ const dom = new JSDOM(
           <li name="pwdRule1">
               Password MUST be at least 8 characters long
           </li>
+          <input type="submit" value="register" name="submit">
        </body>
      </html>`,
     { url: 'http://localhost' },
