@@ -1,5 +1,5 @@
 function nameHandler(e) {
-  console.log("am i the first");
+  //console.log("am i the first");
     const nameRule = document.getElementsByName("nameRule")[0];
     const uname = e.target.value;
     nameRule.style.color = "red";

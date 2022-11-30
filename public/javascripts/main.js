@@ -3,7 +3,7 @@ const addDeletebutton = async () => {
     const another_res = await fetch('/api/delete_author');
     const user = await another_res.json();
     const allPosts = document.getElementsByClassName('commentsEle');
-    console.log(allPosts);
+    //console.log(allPosts);
     for (let i = 0; i < allPosts.length; i++) {
         const username = allPosts[i].getElementsByClassName('commentsName')[0];
         if (username.innerHTML == user.author.name) {
@@ -12,7 +12,7 @@ const addDeletebutton = async () => {
             deletebtn.addEventListener('click', async function (evt) {
                 evt.preventDefault();
                 const content = allPosts[i].getElementsByClassName('content')[0].innerHTML;
-                console.log("content", content);
+                //console.log("content", content);
                 const res = await fetch('/api/delete', {
                     method: 'POST',
                     headers: {
@@ -21,7 +21,7 @@ const addDeletebutton = async () => {
                     body: JSON.stringify({ content })
                 });
                 const parsed = await res.json();
-                console.log("parsed", parsed);
+                //console.log("parsed", parsed);
                 doFilter(parsed);
             });
         }
