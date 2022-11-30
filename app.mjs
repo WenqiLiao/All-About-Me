@@ -111,7 +111,7 @@ app.post('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
     }
   });
 });
-
+// api for filter
 app.get('/api/category', async (req, res) => {
   const comments = await Comment.find({}).exec();
   //console.log("comments in api", comments);
@@ -144,6 +144,43 @@ app.post('/api/category', async (req, res) => {
     res.json({status: 'error'});
   }
 });
+
+//api for delete
+app.get('/api/delete', async (req, res) => {
+  const comments = await Comment.find({}).exec();
+  //console.log("comments in api", comments);
+  res.json(comments.map(c => {
+    return {author: c.author, authorName: c.authorName, horoscope: c.authorHoroscope, relationship: c.authorRelationship, content: c.content};
+  }));
+});
+app.get('/api/delete_author', async (req, res) => {
+  res.json({author: req.user});
+});
+app.post('/api/delete', async (req, res) => {
+  //console.log('api body', req.body);
+  try {
+    const content = req.body.content;
+    console.log("content", content);
+    Comment.findOneAndDelete({content: content}, async function (err, docs) {
+      if (err){
+          console.log("did not delete", err)
+      }
+      console.log(docs);
+      let comments = await Comment.find({}).exec();
+      console.log("comments", comments);
+      res.json(comments.map(c => {
+        return {author: c.author, authorName: c.authorName, horoscope: c.authorHoroscope, relationship: c.authorRelationship, content: c.content};
+      }));
+    });
+
+
+  } catch(e) {
+    console.log("error", e);
+    res.json({status: 'error'});
+  }
+});
+
+
 
 app.get('/logout', function(req, res, next) {
   req.logout(function(err) {
