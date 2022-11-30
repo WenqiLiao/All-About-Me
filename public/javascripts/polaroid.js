@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
   clickedDots();
 
   function clickedDots() {
-    dots
-      .getElementsByClassName('clicked')
-      .forEach(d => d.classList.remove('clicked'));
+    Array.prototype.forEach.call(dots.getElementsByClassName('clicked'), function(d) {
+      d => d.classList.remove('clicked')
+    });
     const crt = Math.floor(gallery.scrollLeft / slideWidth);
     dots
       .querySelector(`div[data-id="${crt}"]`)

@@ -104,7 +104,7 @@ app.post('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
     if (err) {
       res.render('forum', {message: 'error occurs'});
     } else {
-        console.log("save");
+        //console.log("save");
         Comment.find({}).sort('-createdAt').exec((err, comments) => {
             res.render('forum', {comments: comments, user:req.user});
         });
@@ -160,14 +160,14 @@ app.post('/api/delete', async (req, res) => {
   //console.log('api body', req.body);
   try {
     const content = req.body.content;
-    console.log("content", content);
+    //console.log("content", content);
     Comment.findOneAndDelete({content: content}, async function (err, docs) {
       if (err){
           console.log("did not delete", err)
       }
-      console.log(docs);
+      //console.log(docs);
       let comments = await Comment.find({}).exec();
-      console.log("comments", comments);
+      //console.log("comments", comments);
       res.json(comments.map(c => {
         return {author: c.author, authorName: c.authorName, horoscope: c.authorHoroscope, relationship: c.authorRelationship, content: c.content};
       }));

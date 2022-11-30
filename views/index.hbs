@@ -1,67 +1,7 @@
-<body>
-<h2>Please click on "Talk that Talk" button first<br/> Then click the triangle on the disk<br/> So the music can be played!</h2>
-<div id="dz-root"></div>
-<div id="player" style="width:100%;" align="left"></div>
-<div id="controlers">
-    <input type="button" onclick="DZ.player.playAlbum(349507667); return false;" value="Talk that Talk - TWICE"/>
-    <br/>
-    <input type="button" onclick="DZ.player.play(); return false;" value="play"/>
-    <input type="button" onclick="DZ.player.pause(); return false;" value="pause"/>
-    <input type="button" onclick="DZ.player.prev(); return false;" value="prev"/>
-    <input type="button" onclick="DZ.player.next(); return false;" value="next"/>
-    <br/>
-    <input type="button" onclick="DZ.player.setVolume(20); return false;" value="set Volume 20"/>
-    <input type="button" onclick="DZ.player.setVolume(80); return false;" value="set Volume 80"/>
-    <br/><br/><br/>
-</div>
-<div id="slider_seek" class="progressbarplay">
-    <div class="bar" style="width: 0%;"></div>
-</div>
-<script>
-    $(document).ready(function(){
-        $("#controlers input").attr('disabled', true);
-        $("#slider_seek").click(function(evt,arg){
-            var left = evt.offsetX;
-            console.log(evt.offsetX, $(this).width(), evt.offsetX/$(this).width());
-            DZ.player.seek((evt.offsetX/$(this).width()) * 100);
-        });
-    });
-    function event_listener_append() {
-        var pre = document.getElementById('event_listener');
-        var line = [];
-        for (var i = 0; i < arguments.length; i++) {
-            line.push(arguments[i]);
-        }
-    }
-    function onPlayerLoaded() {
-        $("#controlers input").attr('disabled', false);
-        event_listener_append('player_loaded');
-        DZ.Event.subscribe('current_track', function(arg){
-            event_listener_append('current_track', arg.index, arg.track.title, arg.track.album.title);
-        });
-        DZ.Event.subscribe('player_position', function(arg){
-            event_listener_append('position', arg[0], arg[1]);
-            $("#slider_seek").find('.bar').css('width', (100*arg[0]/arg[1]) + '%');
-        });
- 
-        DZ.Event.subscribe('track_end', function() {
-            event_listener_append('track_end');
-        });
-    }
-    document.addEventListener('DOMContentLoaded', function() {
-        DZ.init({
-            appId  : '569222',
-            channelUrl : 'http://developers.deezer.com/examples/channel.php',
-            player : {
-                container : 'player',
-                cover : true,
-                // playlist : true,
-                width : 650,
-                height : 150,
-                onload : onPlayerLoaded
-            }
-        });
-    });
-</script><br/>
-<pre id="event_listener" style="height:100px;overflow:auto;display:none"></pre>
-</body>
+<h1>Welcome to Jessica's personal website</h1>
+<h2>You can do the following:</h2>
+<li>1. If you don't have an account yet, click the 'register' below to create one!</li>
+<li>2. If you already have an account, click the 'login' below to login!</li>
+<li>3. If you have already logged in, you can see and post comments in forum page!</li>
+<li>4. If you have not logged in, clicking 'forum' below will redirect you to login page</li>
+<li>5. If you do not want to log in or register, you can click the 'polaroid' below to see photos!</li>

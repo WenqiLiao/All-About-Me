@@ -103,16 +103,9 @@ An Example Comment:
     * Candidate: 
       * Mocha
 
-* (1 point) Song player SDK
-    * Bring music to my web-app. Play music directly in the web browser, with the Web Playback SDK.
-    * Share my favorite songs with my friends.
-    * Candidate:
-      * Spotify Web Playback SDK
-      * Deezer SDK
 
 
-
-12 points total out of 10 required points 
+11 points total out of 10 required points 
 
 
 ## [Link to Initial Main Project File](app.mjs) 
@@ -122,7 +115,5 @@ An Example Comment:
 1. [passport.js authentication docs](http://passportjs.org/docs)
 2. [tutorial on handling Authentication and Authorization with Node (using JWT)](https://medium.com/quick-code/handling-authentication-and-authorization-with-node-7f9548fedde8)
 3. [mdn client-side form validation doc](https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation)
-4. [spofity api for developer doc](https://developer.spotify.com/documentation/web-api/libraries/)
-5. [deezer sdk](https://developers.deezer.com/login?redirect=/sdk/javascript)
-6. [mocha documentation](https://mochajs.org/)
+4. [mocha documentation](https://mochajs.org/)
 
