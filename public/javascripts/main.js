@@ -1,23 +1,24 @@
 // add delete button for the comments that belong to the user
-const addDeletebutton = async() => {
+const addDeletebutton = async () => {
     const another_res = await fetch('/api/delete_author');
     const user = await another_res.json();
     const allPosts = document.getElementsByClassName('commentsEle');
+    console.log(allPosts);
     for (let i = 0; i < allPosts.length; i++) {
         const username = allPosts[i].getElementsByClassName('commentsName')[0];
         if (username.innerHTML == user.author.name) {
             const deletebtn = allPosts[i].appendChild(document.createElement('button'));
             deletebtn.innerHTML = 'delete';
-            deletebtn.addEventListener('click', async function(evt) {
+            deletebtn.addEventListener('click', async function (evt) {
                 evt.preventDefault();
                 const content = allPosts[i].getElementsByClassName('content')[0].innerHTML;
                 console.log("content", content);
                 const res = await fetch('/api/delete', {
                     method: 'POST',
                     headers: {
-                        'Content-Type':'application/json'
+                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({content})
+                    body: JSON.stringify({ content })
                 });
                 const parsed = await res.json();
                 console.log("parsed", parsed);
@@ -28,8 +29,29 @@ const addDeletebutton = async() => {
 
 }
 
+/*
+const addDeleteAfterFilter = async (comment) => {
+    const deletebtn = comment.appendChild(document.createElement('button'));
+    deletebtn.innerHTML = 'delete';
+    deletebtn.addEventListener('click', async function (evt) {
+        evt.preventDefault();
+        const content = comment.getElementsByClassName('content')[0].innerHTML;
+        console.log("content", content);
+        const res = await fetch('/api/delete', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ content })
+        });
+        const parsed = await res.json();
+        console.log("parsed", parsed);
+        doFilter(parsed);
+    });
+}
+*/
 
-const doFilter = async(parsed) => {
+const doFilter = async (parsed) => {
 
     let table = document.getElementsByClassName('commentsTable')[0];
     table.innerHTML = '';
@@ -49,9 +71,10 @@ const doFilter = async(parsed) => {
         const content = comment.appendChild(document.createElement('div'));
         content.setAttribute("class", "content");
         content.textContent = parsed[i].content;
-       comment.appendChild(document.createElement('br'));
+
+        comment.appendChild(document.createElement('br'));
     }
-    
+    addDeletebutton();
 }
 
 
@@ -62,9 +85,9 @@ const handleInput = async (evt) => {
     const res = await fetch('/api/category', {
         method: 'POST',
         headers: {
-            'Content-Type':'application/json'
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify({category})
+        body: JSON.stringify({ category })
     });
     const parsed = await res.json();
     //console.log("parsed", parsed);
