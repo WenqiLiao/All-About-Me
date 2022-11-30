@@ -105,7 +105,7 @@ app.post('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
       res.render('forum', {message: 'error occurs'});
     } else {
         //console.log("save");
-        Comment.find({}).sort('-createdAt').exec((err, comments) => {
+        Comment.find({}).sort('createdAt: -1').exec((err, comments) => {
             res.render('forum', {comments: comments, user:req.user});
         });
     }
@@ -113,7 +113,7 @@ app.post('/forum', connectEnsureLogin.ensureLoggedIn(), (req, res) => {
 });
 // api for filter
 app.get('/api/category', async (req, res) => {
-  const comments = await Comment.find({}).exec();
+  const comments = await Comment.find({}).sort('createdAt: -1').exec();
   //console.log("comments in api", comments);
   res.json(comments.map(c => {
     return {author: c.author, authorName: c.authorName, horoscope: c.authorHoroscope, relationship: c.authorRelationship, content: c.content};
@@ -126,13 +126,13 @@ app.post('/api/category', async (req, res) => {
     //console.log("category", category);
     let comments;
     if (category === 'mine') {
-      comments = await Comment.find({author: req.user._id}).exec();
+      comments = await Comment.find({author: req.user._id}).sort('createdAt: -1').exec();
     } else if (category === 'friend') {
-      comments = await Comment.find({authorRelationship: category}).exec();
+      comments = await Comment.find({authorRelationship: category}).sort('createdAt: -1').exec();
     } else if (category === 'family') {
-      comments = await Comment.find({authorRelationship: category}).exec();
+      comments = await Comment.find({authorRelationship: category}).sort('createdAt: -1').exec();
     } else if (category === 'all') {
-      comments = await Comment.find({}).exec();
+      comments = await Comment.find({}).sort('createdAt: -1').exec();
     }
     //console.log("comments", comments);
     res.json(comments.map(c => {
@@ -147,7 +147,7 @@ app.post('/api/category', async (req, res) => {
 
 //api for delete
 app.get('/api/delete', async (req, res) => {
-  const comments = await Comment.find({}).exec();
+  const comments = await Comment.find({}).sort('createdAt: -1').exec();
   //console.log("comments in api", comments);
   res.json(comments.map(c => {
     return {author: c.author, authorName: c.authorName, horoscope: c.authorHoroscope, relationship: c.authorRelationship, content: c.content};
@@ -166,7 +166,7 @@ app.post('/api/delete', async (req, res) => {
           console.log("did not delete", err)
       }
       //console.log(docs);
-      let comments = await Comment.find({}).exec();
+      let comments = await Comment.find({}).sort('createdAt: -1').exec();
       //console.log("comments", comments);
       res.json(comments.map(c => {
         return {author: c.author, authorName: c.authorName, horoscope: c.authorHoroscope, relationship: c.authorRelationship, content: c.content};
