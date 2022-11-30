@@ -94,12 +94,22 @@ const handleInput = async (evt) => {
     doFilter(parsed);
 }
 
-
+function preventEmpty() {
+    //console.log("prevent?");
+    if(document.getElementsByName("comment")[0].value.trim().length === 0) { 
+           document.getElementsByName("submitBtn")[0].disabled = true; 
+       } else { 
+        document.getElementsByName("submitBtn")[0].disabled = false; 
+       }
+}
 
 const main = async () => {
     const filter = document.getElementsByClassName('filterBtn')[0];
     filter.addEventListener('click', handleInput);
     addDeletebutton();
+    const input = document.getElementsByName("comment")[0];
+    input.addEventListener('input', preventEmpty);
+    
 }
 
 main();
